@@ -1,0 +1,21 @@
+h3{
+font-size: 4vh;
+color:rgb(9, 9, 58);
+text-decoration: underline;
+}
+
+h4{
+    font-size: 3vh;
+    color: black;
+    font-style: italic;
+}
+p{
+    font-size: 3vh;
+    stroke: black;
+}
+p2{
+    color: white;
+}
+body{
+   background-color:rgb(130, 204, 130);
+}

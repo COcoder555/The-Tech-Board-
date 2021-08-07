@@ -1,0 +1,21 @@
+
+{{#each posts as |post|}}
+<div>
+     <h3>Post Title: {{post.title}}</h3>
+     <h4>User: {{post.user.userName}}</h4>
+     <p>{{post.content}}</p>
+     <p2>{{post.createdAt}}</p2>
+     {{#each post.comments as |comment|}}
+<div>
+     <h3>Comments:</h3>
+     <h4> User: {{comment.user.userName}}</h4>
+     <p>
+          {{comment.content}}
+     <p>
+
+</div>
+</div>
+{{/each}}
+{{/each}}
+
+
