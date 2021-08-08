@@ -1,7 +1,47 @@
-
-{{#each posts as |post|}}
-
-<div class="text-center">
-  <h2>{{post.user.content}}</h2>
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{userName}}!</h2>
   </div>
-  {{/each}}
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Create a New Post:</h3>
+
+    <form class="form new-Post-form">
+      <div class="form-group">
+        <label for="title">Post name:</label>
+        <input class="form-input" type="text" id="title" name="title" />
+      </div>
+    
+      <div class="form-group">
+        <label for="content">Post Description:</label>
+        <textarea class="form-input" id="content" name="content"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" id = "submit"  class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  
+    
+  </div>
+
+  {{#if posts.length}}
+  <div class="col-md-6 ">
+    <h3>Posts:</h3>
+
+    {{#each posts as |post|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/api/posts/{{post.id}}">{{post.title}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger Post-list " data-id="{{post.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/dashboard.js"></script>

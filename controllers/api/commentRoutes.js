@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../../models');
+const { Comment, User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -19,15 +19,18 @@ router.get('/', async (req, res) => {
 
 
 // Create new Comment
-router.post('/', async(res, req) => {
+router.post('/', withAuth, async(req,res) => {
     try {
         const newComment = await Comment.create({
-            ...req.body,
-            content: req.body.content,
-            postId: req.body.postId,
-            userid: req.session.userid,
+         
+           ...req.body,
+                    // postId: req.body.postId,
+            userId: req.session.user_id,
+            logged_in: req.session.logged_in
         });
+        console.log(newComment)
         res.status(200).json(newComment);
+    
     } catch (err) {
         res.status(400).json(err);
     }
@@ -35,19 +38,19 @@ router.post('/', async(res, req) => {
 
 //To Delete a comment
 
-router.delete(':/id', withAuth, async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
-                userId: req.params.userId,
+                user_id: req.session.user_id,
             },
         });
         if (!commentData) {
             res.status(404).json({ message: 'No comment associated with this user!' });
             return;
         }
-        res.status(200).toJason(commentData);
+        res.status(200).json(commentData);
 
     } catch (err) {
         res.status(500).json(err)
