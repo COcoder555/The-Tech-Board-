@@ -19,19 +19,35 @@ router.get('/', async (req, res) => {
 
 
 // Create new Comment
-router.post('/', withAuth, async(req,res) => {
-    try {
-        const newComment = await Comment.create({
+// router.post('/', withAuth, async(req,res) => {
+//     try {
+//         const newComment = await Comment.create({
          
-           ...req.body,
-                    // postId: req.body.postId,
-            userId: req.session.user_id,
-            logged_in: req.session.logged_in
-        });
-        console.log(newComment)
-        res.status(200).json(newComment);
+//            ...req.body,
+//                     // postId: req.body.postId,
+//             userId: req.session.user_id,
+//             logged_in: req.session.logged_in
+//         });
+//         console.log(newComment)
+//         res.status(200).json(newComment);
     
-    } catch (err) {
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// });
+
+
+
+router.post('/', withAuth, async(req,res)=>{
+    try{ console.log(req.session.user_id)
+        const newComment = await Comment.create({
+            ...req.body,
+            userId:req.session.user_id
+
+        });
+        res.status(200).json(newComment);
+    }catch(err){
+        console.log(err)
         res.status(400).json(err);
     }
 });
