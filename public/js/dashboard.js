@@ -38,11 +38,12 @@ const newFormHandler = async (event) => {
     }
   };
   
+  
   document
-    .querySelector('#submit')
+    .querySelector('.newPost')
     .addEventListener('click', newFormHandler);
   
   document
     .querySelector('.Post-list')
     .addEventListener('click', delButtonHandler);
-  
+ 

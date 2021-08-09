@@ -62,4 +62,47 @@ router.get('/:id', withAuth, async (req, res) =>{
     }
 });
 
+router.put('/:id',withAuth, async (req, res) => {
+    try {
+        console.log(req.body)
+      const postUpdate = await Post.update(req.body, {
+        where: {
+          id: req.params.id,
+        }
+  
+      });
+      if (!postUpdate[0]) {
+        res.status(404).json({ message: 'no post with this ID' })
+        return;
+      }
+      res.status(200).json(postUpdate);
+  
+    } catch (err) {
+        console.log(err)
+      res.status(500).json(err);
+    }})
+
+    // To get to user.handlebars
+
+    router.get('/update/:id', withAuth, async (req, res) =>{
+        console.log('route hit');
+        try {
+            const postSingle = await Post.findByPk(req.params.id, {
+                include: [{
+                    model: Comment,
+                    include: [User]
+                }, User]
+            });
+            if (!postSingle) {
+                res.status(404).json({ message: 'No post found with this id!' });
+                return;
+            }
+            const single = postSingle.toJSON();
+            res.status(200).render('update',{...single,logged_in: req.session.logged_in});
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }); 
+
+
 module.exports = router;

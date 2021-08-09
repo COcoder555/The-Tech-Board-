@@ -1,0 +1,26 @@
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Update Post:</h3>
+
+
+
+    <form class="form new-Post-form">
+      <div class="form-group">
+        <label for="title">Post name:</label>
+        <input value="{{title}}" class="form-input" type="text" id="title" name="title" />
+      </div>
+    
+      <div class="form-group">
+        <label for="content">Post Description:</label>
+        <textarea class="form-input" id="content" name="content">{{content}}</textarea>
+      </div>
+      <div class="form-group">
+        <button  type="submit" id = "submit" data-id= "{{id}}"  class="btn btn-primary commentUpdate">Update</button>
+      </div>
+    </form>
+  
+    
+  </div>
+
+
+  <script src="/js/update.js"></script>

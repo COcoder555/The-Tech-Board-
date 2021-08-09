@@ -59,13 +59,15 @@ router.post('/', withAuth, async(req,res)=>{
 //To Delete a comment
 
 router.delete('/:id', withAuth, async (req, res) => {
+    console.log('rout hit for sure')
     try {
         const commentData = await Comment.destroy({
             where: {
-                id: req.params.postId,
+                id: req.params.id,
                 user_id: req.session.user_id,
             },
         });
+        console.log(id,'Whatever it doesnt matter')
         if (!commentData) {
             res.status(404).json({ message: 'No comment associated with this user!' });
             return;
