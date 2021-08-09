@@ -18,23 +18,25 @@ router.get('/', async (req, res) => {
 });
 
 
-// Create new Comment
-// router.post('/', withAuth, async(req,res) => {
-//     try {
-//         const newComment = await Comment.create({
-         
-//            ...req.body,
-//                     // postId: req.body.postId,
-//             userId: req.session.user_id,
-//             logged_in: req.session.logged_in
-//         });
-//         console.log(newComment)
-//         res.status(200).json(newComment);
-    
-//     } catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
+router.put('/:id',withAuth, async (req, res) => {
+    try {
+      const commentUpdate = await Comment.update(req.body, {
+        where: {
+          id: req.params.id,
+        }
+  
+      });
+      if (!commentUpdate[0]) {
+        res.status(404).json({ message: 'no comment with this ID' })
+        return;
+      }
+      res.status(200).json(commentUpdate);
+  
+    } catch (err) {
+      res.status(500).json(err);
+    }})
+
+
 
 
 
@@ -42,8 +44,9 @@ router.post('/', withAuth, async(req,res)=>{
     try{ console.log(req.session.user_id)
         const newComment = await Comment.create({
             ...req.body,
-            postId: req.body.postID,
+            postId: req.body.postId,
             userId:req.session.user_id
+         
 
         });
         res.status(200).json(newComment);
@@ -59,7 +62,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.destroy({
             where: {
-                id: req.params.id,
+                id: req.params.postId,
                 user_id: req.session.user_id,
             },
         });

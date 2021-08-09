@@ -21,6 +21,12 @@
     <form class="form new-Post-form">
      
       <div class="form-group">
+           <div class="col-md-4">
+        <button class="btn btn-sm btn-danger commentDelete" data-id="{{comments.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger commentUpdate" data-id="{{comments.id}}">UPDATE</button>
+      </div>
+    </div>
+    
         <label for="content">Leave a Comment:<span id = "postID"> {{id}} </span></label>
         <textarea class="form-input" id="content" name="content"></textarea>
       </div>
@@ -28,8 +34,7 @@
         <button type="submit" id = "submit"  class="btn btn-primary">Create</button>
       </div>
     </form>
-  
-    
+   </div>
   </div>
 
   <script src = '/js/comment.js'></script>
