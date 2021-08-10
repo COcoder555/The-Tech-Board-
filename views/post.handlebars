@@ -22,12 +22,7 @@
     <form class="form new-Post-form">
      
 
-      <div class="form-group">
-           <div class="col-md-4">
-        <button class="btn btn-sm btn-danger commentDelete" data-id="{{comments.id}}">DELETE</button>
-        <button class="btn btn-sm btn-danger commentUpdate" data-id="{{comments.id}}">UPDATE</button>
-       
-      </div>
+     
     </div>
     
         <label for="content">Leave a Comment:<span id = "postID"> {{id}} </span></label>
@@ -35,8 +30,14 @@
       </div>
       <div class="form-group">
         <button type="submit" id = "submit"  class="btn btn-primary">Create</button>
+             {{!-- <div class="form-group">
+           <div class="col-md-4">
+        <button class="btn btn-sm btn-danger commentDelete" data-id="{{comment.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger commentUpdate" data-id="{{comment.id}}">UPDATE</button>
+       
+      {{!-- </div> -- --}}
       </div>
-    </form>
+      </form>
    </div>
   
   </div>
