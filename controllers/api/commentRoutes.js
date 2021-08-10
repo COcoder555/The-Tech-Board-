@@ -6,6 +6,8 @@ const withAuth = require('../../utils/auth');
 
 // To get all Comments
 
+
+
 router.get('/', async (req, res) => {
     try {
         const commentData = await Comment.findAll();
@@ -17,6 +19,22 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', withAuth, async (req, res) =>{
+    console.log('route hit');
+    try {
+        const commentSingle = await Comment.findByPk(req.params.id, {
+            
+        });
+        if (!commentSingle) {
+            res.status(404).json({ message: 'No post comment found with this id!' });
+            return;
+        }
+        const single = commentSingle.toJSON();
+        res.status(200).render('commentupdate',{...single,logged_in: req.session.logged_in});
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 router.put('/:id',withAuth, async (req, res) => {
     try {
@@ -64,17 +82,18 @@ router.delete('/:id', withAuth, async (req, res) => {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
+               
             },
         });
-        console.log(id,'Whatever it doesnt matter')
+        console.log(req.params.id,'Whatever it doesnt matter')
         if (!commentData) {
             res.status(404).json({ message: 'No comment associated with this user!' });
-            return;
+            return; 
         }
         res.status(200).json(commentData);
 
     } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
 });

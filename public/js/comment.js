@@ -43,27 +43,24 @@ console.log(content);
   const upButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
-  
-      const response = await fetch(`/api/comments/${id}`, {
-        method: 'PUT',
-      });
-  
+      document.location.href = `/api/comments/${id}`
+    }
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
         alert('Failed to update comment');
       }
     }
-  };
+
   
   
   document
     .querySelector('#submit')
     .addEventListener('click', newFormHandler);
     document
-    .querySelector('.commentDelete')
+    .querySelector('.commentBtn')
     .addEventListener('click', delButtonHandler);
     document
-    .querySelector('.commentUpdate')
+    .querySelector('.updateBtn')
     .addEventListener('click', upButtonHandler);
   

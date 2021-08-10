@@ -1,14 +1,12 @@
-
-const upButtonHandler = async (event) => {
-
+const commentButtonHandler = async (event) => {
+    event.preventDefault();
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
-      const title = document.querySelector('#title').value.trim();
       const content = document.querySelector('#content').value.trim();
       
-      const response = await fetch(`/api/posts/${id}`, {
+      const response = await fetch(`/api/comments/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({content}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -22,7 +20,7 @@ const upButtonHandler = async (event) => {
     }
   };
   document
-  .querySelector('.commentUpdate')
-  .addEventListener('click', upButtonHandler);
+  .querySelector('.update')
+  .addEventListener('click', commentButtonHandler);
 
 
